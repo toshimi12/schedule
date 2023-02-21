@@ -7,7 +7,6 @@
 <%end%>
 
 <p><%=link_to"ユーザー新規登録", :new_schedule %></p>
-
 <table>
   <thead>
     <tr>
@@ -28,14 +27,14 @@
   <tr>
     <td><%=schedule.id%></td>
     <td><%=schedule.title%></td>
-    <td><%=schedule.start_at.to_s(:date_jp)%></td>
-    <td><%=schedule.end_at.to_s(:date_jp)%></td>
+    <td><%=schedule.start_at&.strftime("%Y/%m/%d")%></td>
+    <td><%=schedule.end_at&.strftime("%Y/%m/%d")%></td>
     <% if schedule.allday==true %>
     <td>○</td>
     <%else schedule.allday==false %>
     <td></td>
     <%end%> 
-    <td><%=schedule.updated_at.to_s(:datetime_jp)%></td>
+    <td><%=schedule.updated_at.strftime("%Y/%m/%d/%H:%M")%></td>
     <td><%=link_to"詳細",schedule%></td>
   　<td><%=link_to"編集",[:edit,schedule]%></td>
  　  <td><%=link_to"削除", schedule, method: :delete, data: { confirm: "本当に削除しますか？" } %></td>>
@@ -43,4 +42,14 @@
  <%end%> 
 </tbody>
 </table>
+
+<div class ="information">
+
+    <a class = "information-1"><%= "合計予定数：#{@schedules.count}件" %></a>
+
+    <a class ="information-2"><%= "本日の日付：#{Date.today.strftime("%Y/%m/%d")}" %></a>
+
+  </div>
+
+
 
